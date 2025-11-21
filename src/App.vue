@@ -33,9 +33,14 @@
                   <n-icon><DocumentIcon /></n-icon>
                 </template>
               </n-step>
-              <n-step title="Generate Knowledge Base" description="Process documents and create knowledge base">
+              <n-step title="Generate/Refresh" description="Process documents and create knowledge base">
                 <template #icon>
                   <n-icon><SparklesIcon /></n-icon>
+                </template>
+              </n-step>
+              <n-step title="Confirm Schema" description="Review and confirm knowledge schema">
+                <template #icon>
+                  <n-icon><CheckmarkCircleIcon /></n-icon>
                 </template>
               </n-step>
               <n-step title="Knowledge Graph & Q&A" description="View graph and ask questions">
@@ -52,13 +57,19 @@
             @files-changed="handleFilesChanged"
           />
 
-          <!-- Step 2: Generate Knowledge Base -->
+          <!-- Step 2: Generate/Refresh Knowledge Base -->
           <GenerateKnowledge
             :uploaded-files="uploadedFiles"
             @generate-success="handleGenerateSuccess"
           />
 
-          <!-- Step 3: Knowledge Graph & Q&A -->
+          <!-- Step 3: Schema Confirmation -->
+          <SchemaConfirmation
+            :documents="documents"
+            @schema-confirmed="handleSchemaConfirmed"
+          />
+
+          <!-- Step 4: Knowledge Graph & Q&A -->
           <KnowledgeGraph :documents="documents" />
         </div>
       </n-layout-content>
@@ -96,10 +107,12 @@ import {
   SunnyOutline as SunnyIcon,
   DocumentOutline as DocumentIcon,
   SparklesOutline as SparklesIcon,
-  ChatbubbleOutline as ChatbubbleIcon
+  ChatbubbleOutline as ChatbubbleIcon,
+  CheckmarkCircleOutline as CheckmarkCircleIcon
 } from '@vicons/ionicons5'
 import FileUpload from './components/FileUpload.vue'
 import GenerateKnowledge from './components/GenerateKnowledge.vue'
+import SchemaConfirmation from './components/SchemaConfirmation.vue'
 import KnowledgeGraph from './components/KnowledgeGraph.vue'
 
 interface DocumentChunk {
@@ -145,6 +158,11 @@ const handleFilesChanged = (files: File[]) => {
 const handleGenerateSuccess = (docs: Document[]) => {
   documents.value = docs
   currentStep.value = 2
+  stepStatus.value = 'process'
+}
+
+const handleSchemaConfirmed = () => {
+  currentStep.value = 3
   stepStatus.value = 'finish'
 }
 </script>

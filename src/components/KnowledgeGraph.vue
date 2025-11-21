@@ -1,8 +1,8 @@
 <template>
-  <n-card title="Step 3: Knowledge Graph & Q&A" class="knowledge-card">
+  <n-card title="Step 4: Knowledge Graph & Q&A" class="knowledge-card">
     <n-space vertical :size="16">
       <n-alert v-if="documents.length === 0" type="warning">
-        Please complete Step 1 and Step 2 first to generate the knowledge base.
+        Please complete Step 1, Step 2, and Step 3 first to generate and confirm the knowledge base.
       </n-alert>
 
       <div v-else>
@@ -11,7 +11,7 @@
           <div class="graph-container">
             <n-empty v-if="documents.length === 0" description="No knowledge graph available">
               <template #extra>
-                <n-text depth="3">Generate knowledge base in Step 2 to see the graph</n-text>
+                <n-text depth="3">Generate knowledge base in Step 2 and confirm schema in Step 3 to see the graph</n-text>
               </template>
             </n-empty>
             <div v-else class="graph-visualization">

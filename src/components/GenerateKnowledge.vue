@@ -1,5 +1,5 @@
 <template>
-  <n-card title="Step 2: Generate Knowledge Base" class="generate-card">
+  <n-card title="Step 2: Generate/Refresh" class="generate-card">
     <n-space vertical :size="16">
       <n-alert type="info">
         Click the button below to process uploaded documents and generate the knowledge base.
@@ -34,7 +34,7 @@
           <template #icon>
             <n-icon><SparklesIcon /></n-icon>
           </template>
-          Generate Knowledge Base
+          Generate/Refresh Knowledge Base
         </n-button>
       </n-space>
 
@@ -49,7 +49,7 @@
       </n-progress>
 
       <n-alert v-if="generated && !generating" type="success">
-        Knowledge base generated successfully! You can now proceed to Step 3 for Q&A.
+        Knowledge base generated successfully! You can now proceed to Step 3 to confirm the schema.
       </n-alert>
     </n-space>
   </n-card>
